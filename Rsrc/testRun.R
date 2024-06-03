@@ -3,17 +3,23 @@ CSCrun <- T
 setwd("/scratch/project_2000994/srinetri/regional/regional_currV")
 load("input/pPRELES_calPcurrV.rdata")
 load("input/pCROBAS_calPcurrV.rdata")
-r_no <- regions <- 1 ### forest center ID
+r_no <- regions <- 8### forest center ID
 nSetRuns <- 10 #number of set runs
 harvScen <- "Base" ### c("Low","MaxSust","NoHarv","Base","Mitigation", "MitigationNoAdH","adapt","protect")
 harvInten <- "Base"
 regSets <- "maakunta" ### "forCent", "maakunta"
 minDharvX <- 15
-rcps <- "CurrClim" ##name of clim files
+rcpfile <- rcps <- "CurrClim"#CanESM2.rcp26" ##name of clim files ("CanESM2.rcp45.rdata","CanESM2.rcp85.rdata")#c("CurrClim","CanESM2.rcp26.rdata")#,"CanESM2.rcp45.rdata","CanESM2.rcp85.rdata")
 # climIDName <- "clim1800" ### climIDs for ISIMIP resolutions and clim files
 # outType <- "testRun"
-# deadWoodCalc <- F
+deadWoodCalc <- F
+HSIruns <- F
 # forceSaveInitSoil <- T
+
+# pcrobas <- pCROB
+# pcrobas[1:53,1:3] <- pCROBAS_calPcurrV[, 1:3]
+# pCROBAS_calPcurrV <- pcrobas
+# save(pCROBAS_calPcurrV, file="input/pCROBAS_calPcurrV.rdata") 
 
 ##load general settings
 source("Rsrc/settings.r")
@@ -31,12 +37,11 @@ sampleID <- split(1:nSamples,             # Applying split() function
 set.seed(1)
 ops <- split(data.all, sample(1:nSamples, nrow(data.all), replace=T))
 
-for (i in sampleID){
+for (i in c(1:5)){
   sampleX <- ops[[i]]
   start_time <- Sys.time()
   ####run the model with base scenario and initialize the soilC
-  modRun_Base <- runModel(sampleID[[i]], outType="testRun", forceSaveInitSoil = T, deadWoodCalc=F,
-                          harvScen=harvScen, harvInten=harvInten, sampleX = sampleX)
+  modRun_Base <- runModel(sampleID[[i]], outType="dTabs", harvScen=harvScen, harvInten=harvInten, sampleX = sampleX)
   #gc() # Release memory
   ### HOW LOG IT TOOK TO RUN THE CODE
   end_time <- Sys.time()
