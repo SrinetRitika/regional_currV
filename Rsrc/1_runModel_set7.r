@@ -1,5 +1,6 @@
 setwd("/scratch/project_2000994/srinetri/regional/regional_currV")
 source("Rsrc/localSettings.r")
+
 source("Rsrc/settings.r")
 source("Rsrc/functions.r")
 
@@ -7,8 +8,8 @@ setX=7
 nSamples <- ceiling(dim(data.all)[1]/nSitesRun)
 sampleIDs <- split(1:nSamples,             # Applying split() function
                    cut(seq_along(1:nSamples),
-                   nSetRuns,
-                   labels = FALSE))[[setX]]
+                       nSetRuns,
+                       labels = FALSE))[[setX]]
 set.seed(1)
 ops <- split(data.all, sample(1:nSamples, nrow(data.all), replace=T))
 # test

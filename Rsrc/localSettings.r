@@ -1,9 +1,10 @@
 CSCrun = T
 load("input/pPRELES_calPcurrV.rdata")
 load("input/pCROBAS_calPcurrV.rdata")
-r_no = regions = 9 ### forest center ID
+r_no = regions = 3 ### forest center ID
 nSetRuns = 10 #number of set runs
-harvScen = "Base" ### c("Low","MaxSust","NoHarv","Base","Mitigation", "MitigationNoAdH","adapt","protect")
+nSitesRun = 20000
+harvScen = "NoHarv" ### c("Low","MaxSust","NoHarv","Base","Mitigation", "MitigationNoAdH","adapt","protect")
 harvInten = "Base"
 regSets <- "maakunta" ### "forCent", "maakunta"
 minDharvX <- 15

@@ -3,9 +3,9 @@ CSCrun <- T
 setwd("/scratch/project_2000994/srinetri/regional/regional_currV")
 load("input/pPRELES_calPcurrV.rdata")
 load("input/pCROBAS_calPcurrV.rdata")
-r_no <- regions <- 8### forest center ID
+r_no <- regions <- 9 ### forest center ID
 nSetRuns <- 10 #number of set runs
-harvScen <- "Base" ### c("Low","MaxSust","NoHarv","Base","Mitigation", "MitigationNoAdH","adapt","protect")
+harvScen <- "NoHarv" ### c("Low","MaxSust","NoHarv","Base","Mitigation", "MitigationNoAdH","adapt","protect")
 harvInten <- "Base"
 regSets <- "maakunta" ### "forCent", "maakunta"
 minDharvX <- 15
@@ -26,8 +26,8 @@ source("Rsrc/settings.r")
 ##load functions
 source("Rsrc/functions.r")
 
-setX <- 1
-nSitesRun = 1000
+setX <- 9
+nSitesRun = 10
 nSamples <- ceiling(dim(data.all)[1]/nSitesRun)
 sampleID <- split(1:nSamples,             # Applying split() function
                   cut(seq_along(1:nSamples),
