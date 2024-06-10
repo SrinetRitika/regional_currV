@@ -9,5 +9,6 @@ harvInten = "Base"
 regSets <- "maakunta" ### "forCent", "maakunta"
 minDharvX <- 15
 rcps <- "CurrClim" ##name of clim files
-deadWoodCalc <- T
+deadWoodCalc <- F
 HSIruns <- F
+forceSaveInitSoil <- T
