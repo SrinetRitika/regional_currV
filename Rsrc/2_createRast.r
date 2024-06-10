@@ -6,6 +6,11 @@ source("Rsrc/functions.r")
 rcpfile <- rcps
 pathFiles <- paste0("outputDT/forCent",r_no,"/")
 
+# Rasters subdirectory
+raster_subDir <- paste0("rasters/", forCent_folder)
+# Get or create rasters path
+path_raster <- get_or_create_path(pathVarName = "path_raster", defaultDir = defaultDir, subDir = raster_subDir)
+
 if(regSets=="forCent"){
   load(paste0("/scratch/project_2000994/PREBASruns/finRuns/input/forCent/forCent_",r_no,"_IDsTab.rdata"))
 }else{

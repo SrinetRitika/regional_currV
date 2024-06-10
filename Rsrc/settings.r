@@ -30,7 +30,7 @@ library(DescTools)
 
 
 # Load functions
-source("Rsrc/functions.r")
+devtools::source_url("https://raw.githubusercontent.com/ForModLabUHel/IBCcarbon_runs/master/general/functions.r")
 
 
 # r_no = regions = 2  ### forest center ID
@@ -77,12 +77,12 @@ if(!exists("pCROBAS_calPcurrV")) pCROBAS_calPcurrV <- pCROB
 if(!exists("pCrobasX")) pCrobasX <- pCROBAS_calPcurrV
 pCrobasX[17,1:3] <- pCROBAS_calPcurrV[17,1:3]
 
-varOuts <- c("NEP","GPPtrees", "npp", "grossGrowth", 
+varOuts <- c("NEP/SMI[layer_1]","GPPtrees", "npp", "grossGrowth", 
              "soilC", "V", "age", "WroundWood","VroundWood",
              "Litter_fol", "Litter_fr", 
              "Litter_fWoody", "Litter_cWoody",
              "DeadWoodVolume", "D", "BA", "H", "Vmort","Wdb",
-             "Hc_base","wf_STKG","Rh")
+             "Hc_base","wf_STKG","Rh/SBBpob[layer_1]")
 if(!exists("varSel")){
   varSel <- match(varOuts,varNames)
 }
@@ -112,6 +112,7 @@ if(!exists("funX")){
 # Default working directory
 defaultDir <- "/scratch/project_2000994/srinetri/regional/regional_currV"
 
+
 # Forest centre
 forCent_folder <- paste0("forCent", r_no)
 
@@ -121,8 +122,8 @@ initSoilC_subDir <- paste0("initSoilC/", forCent_folder)
 # Outputs subdirectory
 output_subDir <- paste0("outputDT/", forCent_folder)
 
-# Rasters subdirectory
-raster_subDir <- paste0("rasters/", forCent_folder)
+# NAs subdirectory
+na_subDir <- paste0("NAs/")
 
 
 
@@ -135,8 +136,8 @@ path_initSoilC <- get_or_create_path(pathVarName = "path_initSoilC", defaultDir 
 # Get or create outputs path
 path_output <- get_or_create_path(pathVarName = "path_output", defaultDir = defaultDir, subDir = output_subDir)
 
-# Get or create rasters path
-path_raster <- get_or_create_path(pathVarName = "path_raster", defaultDir = defaultDir, subDir = raster_subDir)
+# Get or create NAs path
+path_na <- get_or_create_path(pathVarName = "path_na", defaultDir = defaultDir, subDir = na_subDir)
 
 
 
@@ -155,7 +156,7 @@ harvestLims <- c(9775000,1466000)
 year1harv=0 ###if 1 set harvLim for Low and MaxSust as 0.6 and 1.2 of HarvLim (Base)
 domSPrun = 0   ### 1 -> run only dominant layer
 startingYear = 2015
-endingYear = 2051
+endingYear = 2070
 if(!exists("nYears")) nYears = endingYear-startingYear
 
 if(!exists("rcps")) rcps = "CurrClim" #c("CanESM2.rcp45.rdata","CanESM2.rcp85.rdata")#c("CurrClim","CanESM2.rcp26.rdata")#,"CanESM2.rcp45.rdata","CanESM2.rcp85.rdata")
