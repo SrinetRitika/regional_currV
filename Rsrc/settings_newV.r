@@ -137,7 +137,7 @@ path_initSoilC <- get_or_create_path(pathVarName = "path_initSoilC", defaultDir 
 path_output <- get_or_create_path(pathVarName = "path_output", defaultDir = defaultDir, subDir = output_subDir)
 
 # Get or create rasters path
-path_rasters <- get_or_create_path(pathVarName = "path_raster", defaultDir = defaultDir, subDir = raster_subDir)
+path_raster <- get_or_create_path(pathVarName = "path_raster", defaultDir = defaultDir, subDir = raster_subDir)
 
 
 # Path to climate data
