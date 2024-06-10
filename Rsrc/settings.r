@@ -112,7 +112,6 @@ if(!exists("funX")){
 # Default working directory
 defaultDir <- "/scratch/project_2000994/srinetri/regional/regional_currV"
 
-
 # Forest centre
 forCent_folder <- paste0("forCent", r_no)
 
@@ -121,6 +120,9 @@ initSoilC_subDir <- paste0("initSoilC/", forCent_folder)
 
 # Outputs subdirectory
 output_subDir <- paste0("outputDT/", forCent_folder)
+
+# Rasters subdirectory
+raster_subDir <- paste0("rasters/", forCent_folder)
 
 
 
@@ -132,6 +134,9 @@ path_initSoilC <- get_or_create_path(pathVarName = "path_initSoilC", defaultDir 
 
 # Get or create outputs path
 path_output <- get_or_create_path(pathVarName = "path_output", defaultDir = defaultDir, subDir = output_subDir)
+
+# Get or create rasters path
+path_rasters <- get_or_create_path(pathVarName = "path_raster", defaultDir = defaultDir, subDir = raster_subDir)
 
 
 

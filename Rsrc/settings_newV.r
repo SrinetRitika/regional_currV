@@ -122,6 +122,9 @@ initSoilC_subDir <- paste0("initSoilC/", forCent_folder)
 # Outputs subdirectory
 output_subDir <- paste0("outputDT/", forCent_folder)
 
+# Rasters subdirectory
+raster_subDir <- paste0("rasters/", forCent_folder)
+
 
 
 # Get or create working directory path
@@ -133,6 +136,8 @@ path_initSoilC <- get_or_create_path(pathVarName = "path_initSoilC", defaultDir 
 # Get or create outputs path
 path_output <- get_or_create_path(pathVarName = "path_output", defaultDir = defaultDir, subDir = output_subDir)
 
+# Get or create rasters path
+path_rasters <- get_or_create_path(pathVarName = "path_raster", defaultDir = defaultDir, subDir = raster_subDir)
 
 
 # Path to climate data

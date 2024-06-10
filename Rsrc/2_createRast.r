@@ -1,4 +1,5 @@
-source("localSettings.r")
+setwd("/scratch/project_2000994/srinetri/regional/regional_currV")
+source("Rsrc/localSettings_rast.r")
 source("Rsrc/settings.r")
 source("Rsrc/functions.r")
 
@@ -38,8 +39,8 @@ pdf(paste0("plots/histRast_",r_no,
 if(!exists("varXs")) varXs <- c(varNames[varSel], specialVars)
 
 for(varX in varXs){
-  # varX <- varXs[1]
-  fileXs <- list.files(path = paste0(pathtoken,pathFiles), pattern = paste0(varX,"_harscen",harvScen,"_harInten",harvInten,"_",rcps))
+  # varX <- varXs[2]
+  fileXs <- list.files(path = paste0(pathFiles), pattern = paste0(varX,"_harscen",harvScen,"_harInten",harvInten,"_",rcps))
   if(length(fileXs) != nSamples) stop(paste0(nSamples-length(fileXs)," files missing"))
   
   outX <- data.table()
