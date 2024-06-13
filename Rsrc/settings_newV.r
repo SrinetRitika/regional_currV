@@ -1,26 +1,38 @@
 # CSCrun=T
-
+require(devtools)
 library(raster)
 library(rgdal)
 library(parallel)
 library(ggplot2)
 library(readxl)
 
-###load packages in CSC project folder
-# if(CSCrun){
-if(CSCrun){
-  .libPaths(c("/scratch/project_2000994/newV", .libPaths()))
-  libpath <- .libPaths()[1]
+
+# ###choose PREBAS version
+if(!exists("vPREBAS")) vPREBAS = "newVersion"   #### choose PREBAS version to run the model  "master" "v0.2.x"
+
+if(CSCrun & vPREBAS == "newVersion") {
+  RprebassoFolder = "/projappl/project_2000994/Rpackages/Rprebasso_newV"
+  .libPaths(c(RprebassoFolder,
+              "/projappl/project_2000994/Rpackages/project_rpackages",
+              .libPaths()))
 }
-require(devtools)
+if(CSCrun & vPREBAS == "master"){
+  RprebassoFolder = "/projappl/project_2000994/Rpackages/Rprebasso_master"
+  .libPaths(c(RprebassoFolder,
+              "/projappl/project_2000994/Rpackages/project_rpackages",
+              .libPaths()))
+}
+# if(CSCrun){
+#   .libPaths(c("/projappl/project_2000994/project_rpackages", .libPaths()))
+#   libpath <- .libPaths()[1]
+# }
+
 require(data.table)
 require(plyr)
 require(dplyr)
 require(abind)
 require(sm)
 
-# ###choose PREBAS version
-vPREBAS <- "newVersion"   #### choose PREBAS version to run the model  "master" "v0.2.x"
 install_github("ForModLabUHel/Rprebasso", ref=vPREBAS)
 
 require(Rprebasso)
@@ -30,7 +42,8 @@ library(DescTools)
 
 
 # Load functions
-source("Rsrc/functions_newV.r")
+# devtools::source_url("https://raw.githubusercontent.com/ForModLabUHel/IBCcarbon_runs/master/general/functions.r")
+source("Rsrc/functions.r")
 
 
 # r_no = regions = 2  ### forest center ID
@@ -156,7 +169,7 @@ harvestLims <- c(9775000,1466000)
 year1harv=0 ###if 1 set harvLim for Low and MaxSust as 0.6 and 1.2 of HarvLim (Base)
 domSPrun = 0   ### 1 -> run only dominant layer
 startingYear = 2015
-endingYear = 2051
+endingYear = 2070
 if(!exists("nYears")) nYears = endingYear-startingYear
 
 if(!exists("rcps")) rcps = "CurrClim" #c("CanESM2.rcp45.rdata","CanESM2.rcp85.rdata")#c("CurrClim","CanESM2.rcp26.rdata")#,"CanESM2.rcp45.rdata","CanESM2.rcp85.rdata")
@@ -187,9 +200,14 @@ if(regSets=="forCent"){
 ####procData
 cord.ne = SpatialPoints(cbind(data.IDs$x,data.IDs$y), proj4string=CRS("+init=EPSG:3067"))
 location<-as.data.frame(spTransform(cord.ne, CRS("+init=epsg:4326")))
+rm(list=c("cord.ne")); gc()
 lat <- location$coords.x2
+rm(list=c("location")); gc()
 data.IDs$latitude <- lat
-latitude <- aggregate(.~segID, data=data.IDs, mean)$latitude
+rm(list=c("lat")); gc()
+
+latitude <- aggregate(.~maakuntaID, data=data.IDs, mean)$latitude
+
 data.all <- data.all[fert %in% siteTypes]
 data.all <- data.all[landclass %in% landClassX]
 cloudpixels = data.all[, sum(ba==32766)]

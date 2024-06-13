@@ -44,7 +44,7 @@ pdf(paste0("plots/histRast_",r_no,
 if(!exists("varXs")) varXs <- c(varNames[varSel], specialVars)
 # varXs[1] <- "NEP"
 # varXs[22] <- "Rh"
-for(varX in varXs[c(2:21,23:32)]){
+for(varX in varXs){
   # varX <- varXs[1]
   fileXs <- list.files(path = paste0(pathFiles), pattern = paste0(varX,"_harscen",harvScen,"_harInten",harvInten,"_",rcps))
   if(length(fileXs) != nSamples) stop(paste0(nSamples-length(fileXs)," files missing"))
@@ -92,7 +92,7 @@ for(varX in varXs[c(2:21,23:32)]){
   rm(rastX);gc()
   
   # if(varX!="DeadWoodVolume")  file.remove(paste0(pathFiles,fileXs))
-  file.remove(paste0(pathFiles,fileXs))
+  # file.remove(paste0(pathFiles,fileXs))
   print(varX)
 }
 dev.off()

@@ -1,0 +1,46 @@
+[1] "start sample ID 31"
+[1] "start sample ID 32"
+[1] "start sample ID 33"
+[1] "start sample ID 34"
+[1] "SampleID 31 clim ids:  1125 was replaced with 1124"
+[1] "SampleID 33 clim ids:  1726 was replaced with 1725"
+[1] "SampleID 32 clim ids:  1726 was replaced with 1725"
+[1] "SampleID 34 clim ids:  1726 was replaced with 1725"
+[1] "SampleID 31 clim ids:  1240 was replaced with 1239"
+[1] "SampleID 33 clim ids:  1240 was replaced with 1239"
+[1] "SampleID 32 clim ids:  1240 was replaced with 1239"
+[1] "SampleID 34 clim ids:  1125 was replaced with 1124"
+[1] "SampleID 32 clim ids:  1350 was replaced with 1351"
+[1] "SampleID 34 clim ids:  1240 was replaced with 1239"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "runModel 33 completed"
+[1] "runModel 31 completed"
+[1] "runModel 34 completed"
+[1] "runModel 32 completed"
+[1] "start special vars 34"
+[1] "start special vars 33"
+[1] "start special vars 31"
+[1] "start special vars 32"
+[[1]]
+[1] "all outs saved"
+
+[[2]]
+[1] "all outs saved"
+
+[[3]]
+[1] "all outs saved"
+
+[[4]]
+[1] "all outs saved"
+

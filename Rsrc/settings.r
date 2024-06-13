@@ -1,26 +1,38 @@
 # CSCrun=T
-
+require(devtools)
 library(raster)
 library(rgdal)
 library(parallel)
 library(ggplot2)
 library(readxl)
 
-###load packages in CSC project folder
-# if(CSCrun){
-if(CSCrun){
-  .libPaths(c("/projappl/project_2000994/project_rpackages", .libPaths()))
-  libpath <- .libPaths()[1]
+
+# ###choose PREBAS version
+if(!exists("vPREBAS")) vPREBAS = "master"   #### choose PREBAS version to run the model  "master" "v0.2.x"
+
+if(CSCrun & vPREBAS == "newVersion") {
+  RprebassoFolder = "/projappl/project_2000994/Rpackages/Rprebasso_newV"
+  .libPaths(c(RprebassoFolder,
+              "/projappl/project_2000994/Rpackages/project_rpackages",
+              .libPaths()))
 }
-require(devtools)
+if(CSCrun & vPREBAS == "master"){
+  RprebassoFolder = "/projappl/project_2000994/Rpackages/Rprebasso_master"
+  .libPaths(c(RprebassoFolder,
+              "/projappl/project_2000994/Rpackages/project_rpackages",
+              .libPaths()))
+}
+# if(CSCrun){
+#   .libPaths(c("/projappl/project_2000994/project_rpackages", .libPaths()))
+#   libpath <- .libPaths()[1]
+# }
+
 require(data.table)
 require(plyr)
 require(dplyr)
 require(abind)
 require(sm)
 
-# ###choose PREBAS version
-vPREBAS <- "master"   #### choose PREBAS version to run the model  "master" "v0.2.x"
 install_github("ForModLabUHel/Rprebasso", ref=vPREBAS)
 
 require(Rprebasso)
@@ -30,7 +42,8 @@ library(DescTools)
 
 
 # Load functions
-devtools::source_url("https://raw.githubusercontent.com/ForModLabUHel/IBCcarbon_runs/master/general/functions.r")
+# devtools::source_url("https://raw.githubusercontent.com/ForModLabUHel/IBCcarbon_runs/master/general/functions.r")
+source("Rsrc/functions.r")
 
 
 # r_no = regions = 2  ### forest center ID
@@ -86,6 +99,8 @@ varOuts <- c("NEP/SMI[layer_1]","GPPtrees", "npp", "grossGrowth",
 if(!exists("varSel")){
   varSel <- match(varOuts,varNames)
 }
+varOuts[1] <- varNames[46] <- "NEP"
+varOuts[22] <- varNames[45] <- "Rh"
 if(!exists("specialVars")){
   specialVars <- c("domSpecies","domAge","Vdec","Vpine","Vspruce","VenergyWood",
                    "WenergyWood","Wtot","GVgpp","GVw")
@@ -181,9 +196,20 @@ if(regSets=="forCent"){
   load(paste0("/scratch/project_2000994/PREBASruns/finRuns/input/forCent/data.all_forCent_",r_no,".rdata"))
 }else{
   load(paste0("/scratch/project_2000994/PREBASruns/finRuns/input/maakunta/data.all_maakunta_",r_no,".rdata"))
+  load(paste0("/scratch/project_2000994/PREBASruns/finRuns/input/maakunta/maakunta_",r_no,"_IDsTab.rdata"))
   data.all$segID <- data.all$maakuntaID
 }
 ####procData
+cord.ne = SpatialPoints(cbind(data.IDs$x,data.IDs$y), proj4string=CRS("+init=EPSG:3067"))
+location<-as.data.frame(spTransform(cord.ne, CRS("+init=epsg:4326")))
+rm(list=c("cord.ne")); gc()
+lat <- location$coords.x2
+rm(list=c("location")); gc()
+data.IDs$latitude <- lat
+rm(list=c("lat")); gc()
+
+latitude <- aggregate(.~maakuntaID, data=data.IDs, mean)$latitude
+
 data.all <- data.all[fert %in% siteTypes]
 data.all <- data.all[landclass %in% landClassX]
 cloudpixels = data.all[, sum(ba==32766)]
@@ -197,7 +223,7 @@ setnames(data.all,"nPix","N")
 ## REMOVE CLOUD COVERED, AND WHERE cons = NA (...? why)
 data.all = data.all[ba < 32766]
 data.all = data.all[!is.na(cons)]
-
+data.all <- data.all[, latitude := latitude]
 
 ####load data
 # load("outSoil/InitSoilCstst_Base.rdata")

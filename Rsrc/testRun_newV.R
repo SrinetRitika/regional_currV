@@ -3,13 +3,13 @@ CSCrun <- T
 setwd("/scratch/project_2000994/srinetri/regional/regional_newV")
 load("input/pPRELES_newVcalP_CN.rdata")
 load("input/pCROBAS_newVcalP_CN.rdata")
-r_no <- regions <- 1 ### forest center ID
+r_no <- regions <- 8 ### forest center ID
 nSetRuns <- 10 #number of set runs
 harvScen <- "Base" ### c("Low","MaxSust","NoHarv","Base","Mitigation", "MitigationNoAdH","adapt","protect")
 harvInten <- "Base"
 regSets <- "maakunta" ### "forCent", "maakunta"
 minDharvX <- 15
-rcpfile <- rcps <- "CurrClim"#CanESM2.rcp26" ##name of clim files ("CanESM2.rcp45.rdata","CanESM2.rcp85.rdata")#c("CurrClim","CanESM2.rcp26.rdata")#,"CanESM2.rcp45.rdata","CanESM2.rcp85.rdata")
+rcpfile <- rcps <- "CanESM2.rcp45"#CanESM2.rcp26" ##name of clim files ("CanESM2.rcp45.rdata","CanESM2.rcp85.rdata")#c("CurrClim","CanESM2.rcp26.rdata")#,"CanESM2.rcp45.rdata","CanESM2.rcp85.rdata")
 # climIDName <- "clim1800" ### climIDs for ISIMIP resolutions and clim files
 # outType <- "testRun"
 deadWoodCalc <- F

@@ -1,0 +1,90 @@
+[1] "start sample ID 10"
+[1] "start sample ID 11"
+[1] "start sample ID 12"
+[1] "start sample ID 13"
+[1] "start sample ID 14"
+[1] "start sample ID 15"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "runModel 10 completed"
+[1] "runModel 15 completed"
+[1] "runModel 13 completed"
+[1] "initSoilC 10"
+[1] "initSoilC 15"
+[1] "initSoilC 13"
+[1] "runModel 12 completed"
+[1] "runModel 11 completed"
+[1] "runModel 14 completed"
+[1] "initSoilC 12"
+[1] "initSoilC 11"
+[1] "initSoilC 14"
+[1] "start special vars 10"
+[1] "start special vars 15"
+[1] "start special vars 13"
+[1] "start special vars 14"
+[1] "start special vars 12"
+[1] "start special vars 11"
+[1] "start sample ID 16"
+[1] "start sample ID 18"
+[1] "start sample ID 17"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "runModel 16 completed"
+[1] "initSoilC 16"
+[1] "runModel 18 completed"
+[1] "runModel 17 completed"
+[1] "initSoilC 18"
+[1] "initSoilC 17"
+[1] "start special vars 16"
+[1] "start special vars 18"
+[1] "start special vars 17"
+[[1]]
+[1] "all outs saved"
+
+[[2]]
+[1] "all outs saved"
+
+[[3]]
+[1] "all outs saved"
+
+[[4]]
+[1] "all outs saved"
+
+[[5]]
+[1] "all outs saved"
+
+[[6]]
+[1] "all outs saved"
+
+[[7]]
+[1] "all outs saved"
+
+[[8]]
+[1] "all outs saved"
+
+[[9]]
+[1] "all outs saved"
+

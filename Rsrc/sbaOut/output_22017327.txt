@@ -1,0 +1,46 @@
+[1] "start sample ID 1"
+[1] "start sample ID 2"
+[1] "start sample ID 3"
+[1] "start sample ID 4"
+[1] "SampleID 3 clim ids:  1726 was replaced with 1725"
+[1] "SampleID 2 clim ids:  1726 was replaced with 1725"
+[1] "SampleID 1 clim ids:  1726 was replaced with 1725"
+[1] "SampleID 4 clim ids:  1240 was replaced with 1239"
+[1] "SampleID 2 clim ids:  1240 was replaced with 1239"
+[1] "SampleID 1 clim ids:  1240 was replaced with 1239"
+[1] "SampleID 3 clim ids:  1240 was replaced with 1239"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "runModel 4 completed"
+[1] "runModel 2 completed"
+[1] "runModel 1 completed"
+[1] "runModel 3 completed"
+[1] "start special vars 4"
+[1] "start special vars 2"
+[1] "start special vars 3"
+[[1]]
+[1] "Error in save(out, file = paste0(path_output, \"/outputDT/forCent\", r_no,  : \n  error writing to connection\n"
+attr(,"class")
+[1] "try-error"
+attr(,"condition")
+<simpleError in save(out, file = paste0(path_output, "/outputDT/forCent", r_no,     "/testData.rdata")): error writing to connection>
+
+[[2]]
+[1] "all outs saved"
+
+[[3]]
+[1] "all outs saved"
+
+[[4]]
+[1] "all outs saved"
+

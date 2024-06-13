@@ -1,0 +1,34 @@
+[1] "start sample ID 5"
+[1] "start sample ID 6"
+[1] "start sample ID 7"
+[1] "SampleID 6 clim ids:  1726 was replaced with 1725"
+[1] "SampleID 7 clim ids:  1726 was replaced with 1725"
+[1] "SampleID 5 clim ids:  1125 was replaced with 1124"
+[1] "SampleID 6 clim ids:  1240 was replaced with 1239"
+[1] "SampleID 7 clim ids:  1125 was replaced with 1124"
+[1] "SampleID 5 clim ids:  1240 was replaced with 1239"
+[1] "SampleID 7 clim ids:  1240 was replaced with 1239"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "runModel 5 completed"
+[1] "runModel 6 completed"
+[1] "runModel 7 completed"
+[1] "start special vars 5"
+[1] "start special vars 6"
+[1] "start special vars 7"
+[[1]]
+[1] "all outs saved"
+
+[[2]]
+[1] "all outs saved"
+
+[[3]]
+[1] "all outs saved"
+

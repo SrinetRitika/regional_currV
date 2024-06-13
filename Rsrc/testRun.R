@@ -1,11 +1,12 @@
 # define the settings
 CSCrun <- T
+vPREBAS = "master"   #### choose PREBAS version to run the model  "master" "v0.2.x" "newVersion"
 setwd("/scratch/project_2000994/srinetri/regional/regional_currV")
 load("input/pPRELES_calPcurrV.rdata")
 load("input/pCROBAS_calPcurrV.rdata")
-r_no <- regions <- 9 ### forest center ID
+r_no <- regions <- 1 ### forest center ID
 nSetRuns <- 10 #number of set runs
-harvScen <- "NoHarv" ### c("Low","MaxSust","NoHarv","Base","Mitigation", "MitigationNoAdH","adapt","protect")
+harvScen <- "Base" ### c("Low","MaxSust","NoHarv","Base","Mitigation", "MitigationNoAdH","adapt","protect")
 harvInten <- "Base"
 regSets <- "maakunta" ### "forCent", "maakunta"
 minDharvX <- 15
@@ -14,7 +15,7 @@ rcpfile <- rcps <- "CurrClim"#CanESM2.rcp26" ##name of clim files ("CanESM2.rcp4
 # outType <- "testRun"
 deadWoodCalc <- F
 HSIruns <- F
-# forceSaveInitSoil <- T
+forceSaveInitSoil <- F
 
 # pcrobas <- pCROB
 # pcrobas[1:53,1:3] <- pCROBAS_calPcurrV[, 1:3]
@@ -26,7 +27,7 @@ source("Rsrc/settings.r")
 ##load functions
 source("Rsrc/functions.r")
 
-setX <- 9
+setX <- 1
 nSitesRun = 10
 nSamples <- ceiling(dim(data.all)[1]/nSitesRun)
 sampleID <- split(1:nSamples,             # Applying split() function

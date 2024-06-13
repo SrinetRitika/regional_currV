@@ -1,0 +1,81 @@
+[1] "start sample ID 78"
+[1] "start sample ID 79"
+[1] "start sample ID 80"
+[1] "start sample ID 81"
+[1] "start sample ID 82"
+[1] "start sample ID 83"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "runModel 82 completed"
+[1] "runModel 78 completed"
+[1] "runModel 81 completed"
+[1] "runModel 80 completed"
+[1] "runModel 79 completed"
+[1] "runModel 83 completed"
+[1] "start special vars 82"
+[1] "start special vars 78"
+[1] "start special vars 81"
+[1] "start special vars 80"
+[1] "start special vars 79"
+[1] "start special vars 83"
+[1] "start sample ID 84"
+[1] "start sample ID 85"
+[1] "start sample ID 86"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "runModel 84 completed"
+[1] "runModel 85 completed"
+[1] "runModel 86 completed"
+[1] "start special vars 84"
+[1] "start special vars 86"
+[1] "start special vars 85"
+[[1]]
+[1] "all outs saved"
+
+[[2]]
+[1] "all outs saved"
+
+[[3]]
+[1] "all outs saved"
+
+[[4]]
+[1] "all outs saved"
+
+[[5]]
+[1] "all outs saved"
+
+[[6]]
+[1] "all outs saved"
+
+[[7]]
+[1] "all outs saved"
+
+[[8]]
+[1] "all outs saved"
+
+[[9]]
+[1] "all outs saved"
+

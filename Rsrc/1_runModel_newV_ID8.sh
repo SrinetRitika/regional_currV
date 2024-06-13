@@ -10,7 +10,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=6
 #SBATCH --nodes=1
-#SBATCH --mem-per-cpu=61000
+#SBATCH --mem-per-cpu=60000
 #SBATCH --mail-type=END
 #SBATCH --mail-user=ritika.srinet@helsinki.fi
 

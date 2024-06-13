@@ -1,3 +1,4 @@
+
 ## ---------------------------------------------------------------------
 ## FUNCTIONS
 ## ---------------------------------------------------------------------
@@ -14,7 +15,10 @@ runModel <- function(sampleID, outType="dTabs", uncRCP=0,
                      funPreb = regionPrebas,
                      initSoilCreStart=NULL,
                      outModReStart=NULL,reStartYear=1,
-                     sampleX=NULL,deadWoodCalc=F,latitude=NA){
+                     sampleX=NULL,deadWoodCalc=TRUE,
+                     harvLimDef=list(),
+                     clCutDef=NA, latitude=NA){
+  
   # outType determines the type of output:
   # dTabs -> standard run, mod outputs saved as data.tables 
   # testRun-> test run reports the mod out and initPrebas as objects
@@ -23,7 +27,7 @@ runModel <- function(sampleID, outType="dTabs", uncRCP=0,
   # uncSeg -> reports the list of output table for the segment uncertainty run
   # cons10run -> flag for conservation areas 10% run
   # deadWoodCalc=TRUE -> flag for deadwood calculations if not interested in deadWood set to FALSE
-  
+  # kuntaNielu -> will output the variables needed in the project
   
   # print(date())
   if(!is.null(sampleX)) sampleID <- paste0("sampleX_",sampleID)
@@ -230,7 +234,7 @@ runModel <- function(sampleID, outType="dTabs", uncRCP=0,
                                      startingYear = startingYear,domSPrun=domSPrun,
                                      harv=harvScen, HcFactorX=HcFactor,
                                      initSoilC=initSoilCreStart, reStartYear=reStartYear,
-                                     outModReStart=outModReStart, latitude)
+                                     outModReStart=outModReStart)
   
   if(outType %in% c("uncRun","uncSeg")){
     initPrebas$pPRELES <- pPRELES
@@ -413,6 +417,19 @@ runModel <- function(sampleID, outType="dTabs", uncRCP=0,
     HarvLim1<-rbind(HarvLim1,matrix(HarvLim1[nrow(HarvLim1),],(nYears-nrow(HarvLim1)),ncol(HarvLim1),byrow = T))
   }
   HarvLimX <- HarvLim1[1:nYears,]
+  
+  # Check if harvLims and clearCuts are provided as parameters
+  
+  if(length(harvLimDef) != 0){
+    wEnRatio <- mean(HarvLimX[,2]/rowSums(HarvLimX))
+    harvLimDef[,2] <- harvLimDef[,1]*wEnRatio
+    harvLimDef[,1] <- harvLimDef[,1]*(1-wEnRatio)
+    HarvLimX = harvLimDef
+    if(harvInten == "Low"){ HarvLimX <- HarvLimX * 0.6}
+  } 
+  
+  if(!is.na(clCutDef)) cutArX[,1] <- clCutDef
+  
   
   if(harvScen %in% c("adapt","adaptNoAdH","adaptTapio")){
     if(harvScen=="adaptNoAdH"){
@@ -618,9 +635,9 @@ runModel <- function(sampleID, outType="dTabs", uncRCP=0,
         tmp<-unmanDeadW$ssDeadW
         tmp<-rbind(tmp,matrix(tmp[nrow(tmp),],ncol=ncol(tmp),nrow=nYears-nrow(tmp),byrow = T))
         unmanDeadW$ssDeadW<-tmp
-        tmp<-deadW$ssDeadW
+        tmp<-manDeadW$ssDeadW
         tmp<-rbind(tmp,matrix(tmp[nrow(tmp),],ncol=ncol(tmp),nrow=nYears-nrow(tmp),byrow = T))
-        deadW$ssDeadW<-tmp
+        manDeadW$ssDeadW<-tmp
       } 
       
       region <- management_to_region_multiOut(region = region, management_vector = manFor, deadW = manDeadW, nYears = nYears)
@@ -659,6 +676,76 @@ runModel <- function(sampleID, outType="dTabs", uncRCP=0,
   }  
   
   if(outType=="testRun") return(list(region = region,initPrebas=initPrebas))
+  if(outType=="kuntaNielu"){
+    ####create pdf for test plots 
+    marginX= 1:2#(length(dim(out$annual[,,varSel,]))-1)
+    
+    for (ij in 1:length(varSel)) {
+      print(paste0("varSel ", varSel[ij]))
+      if(funX[ij]=="baWmean"){
+        outX <- data.table(segID=sampleX$segID,baWmean(region,varSel[ij]))
+      }
+      if(funX[ij]=="sum"){
+        outX <- data.table(segID=sampleX$segID,apply(region$multiOut[,,varSel[ij],,1],marginX,sum))
+      }
+      
+      # Remove special characters from varNames[varSel[ij]]
+      varSel_name <- strsplit(varNames[varSel[ij]], split = "/")[[1]][1]
+      assign(varSel_name,outX)
+      
+      save(list=varSel_name,
+           file=paste0(path_output, "/outputDT/forCent",r_no,"/",
+                       varSel_name,
+                       "_harscen",harvScen,
+                       "_harInten",harvInten,"_",
+                       rcpfile,"_","sampleID",sampleID,".rdata"))
+      rm(list=varSel_name); gc()
+    }
+    
+    WenergyWood <- data.table(segID=sampleX$segID,apply(region$multiEnergyWood[,,,2],1:2,sum))
+    GVgpp <- data.table(segID=sampleX$segID,region$GVout[,,3])
+    GVw <- data.table(segID=sampleX$segID,region$GVout[,,4])
+    outputNames <- c("WenergyWood","GVgpp","GVw")
+    print(paste0("outputNames ", outputNames))
+    invisible(lapply(outputNames, function(x) save(list=x, file = get_out_file(path_output = path_output, 
+                                                                               variable_name = x,
+                                                                               r_no = r_no,
+                                                                               harvScen = harvScen,
+                                                                               harvInten = harvInten,
+                                                                               rcpfile = rcpfile,
+                                                                               sampleID = sampleID))))
+    
+    
+    # Biodiversity indicators
+    bioInd <- calBioIndices(region)
+    
+    # Cast to data table with segID
+    bioIndList <- lapply(bioInd,function(x) data.table(segID=sampleX$segID, x))
+    
+    # Save
+    invisible(lapply(seq_along(bioIndList), function(x) {
+      
+      temp_env <- new.env()
+      
+      var_name <- names(bioIndList)[x]
+      
+      assign(var_name, bioIndList[[x]], envir = temp_env)
+      
+      filename <- get_out_file(path_output = path_output,
+                               variable_name = var_name,
+                               r_no = r_no,
+                               harvScen = harvScen,
+                               harvInten = harvInten,
+                               rcpfile = rcpfile,
+                               sampleID = sampleID)
+      
+      save(list = var_name, file=filename, envir = temp_env)
+      
+      rm(temp_env)
+    }))
+    
+    return("all outs saved for KuntaNielu")  
+  }
   if(outType=="dTabs"){
     runModOut(sampleID, sampleX,region,r_no,harvScen,harvInten,rcpfile,areas,
               colsOut1,colsOut2,colsOut3,varSel,sampleForPlots)
@@ -768,6 +855,24 @@ runModOut <- function(sampleID, sampleX,modOut,r_no,harvScen,harvInten,rcpfile,a
     save(out,file = paste0(path_output, "/outputDT/forCent",r_no,"/testData.rdata"))
     rm(out);gc()
   } 
+  
+  
+  
+  
+  
+  ### ----------------- TEST SAVE MULTIOUT ----------------- ###
+  
+  out <- modOut$multiOut
+  save(out,file = paste0(path_output, "/outputDT/forCent",r_no,"/testData.rdata"))
+  rm(out);gc()
+  
+  ### ----------------- END TEST SAVE MULTIOUT ----------------- ###
+  
+  
+  
+  
+  
+  
   marginX= 1:2#(length(dim(out$annual[,,varSel,]))-1)
   nas <- data.table()
   
@@ -798,6 +903,7 @@ runModOut <- function(sampleID, sampleX,modOut,r_no,harvScen,harvInten,rcpfile,a
     } 
     
     assign(varNames[varSel[ij]],pX)
+    
     save(list=varNames[varSel[ij]],
          file=paste0(path_output, "/outputDT/forCent",r_no,"/",
                      varNames[varSel[ij]],
@@ -807,7 +913,7 @@ runModOut <- function(sampleID, sampleX,modOut,r_no,harvScen,harvInten,rcpfile,a
     rm(list=varNames[varSel[ij]]); gc()
     # save NAs
     if(nrow(nas)>0){
-      save(nas,file=paste0("NAs/NAs_forCent",r_no,
+      save(nas,file=paste0(path_na, "/NAs/NAs_forCent",r_no,
                            "_","sampleID",sampleID,
                            "_harscen",harvScen,
                            "_harInten",harvInten,"_",
@@ -1080,6 +1186,7 @@ create_prebas_input.f = function(r_no, clim, data.sample, nYears,
   initVar[,6,] <- aaply(initVar,1,findHcNAs,pHcM,pCrobasX,HcModVx)[,6,]*HcFactorX
   initPrebas <- InitMultiSite(nYearsMS = rep(nYears,nSites),siteInfo=siteInfo,
                               # litterSize = litterSize,#pAWEN = parsAWEN,
+                              pPRELES = pPRELES_newVcalP_CN,
                               pCROBAS = pCrobasX,
                               defaultThin=defaultThin,
                               ClCut = ClCut, areas =areas,
@@ -1093,7 +1200,8 @@ create_prebas_input.f = function(r_no, clim, data.sample, nYears,
                               Precip=clim$Precip[, 1:(nYears*365)],
                               CO2=clim$CO2[, 1:(nYears*365)],
                               yassoRun = 1,
-                              mortMod = mortMod,
+                              mortMod = mortMod,ECMmod = 1, pCN_alfar= parsCN_alfar,
+                              alpharVersion = 1,alpharNcalc = T,
                               latitude=latitude)
   
   if(!is.null(outModReStart)){
@@ -1185,19 +1293,19 @@ calMean <- function(varX,hscenX,areas){
 
 
 
+# Get the output path for a variable
+get_out_file <- function(path_output, variable_name, r_no, harvScen, harvInten, rcpfile, sampleID) {
+  out_file <- paste0(path_output,"/outputDT/forCent",r_no,"/", variable_name,
+                     "_harscen",harvScen,
+                     "_harInten",harvInten,"_",
+                     rcpfile,"_",
+                     "sampleID",sampleID,".rdata")
+  return(out_file)
+}
+
 specialVarProc <- function(sampleX,region,r_no,harvScen,harvInten,rcpfile,sampleID,
                            colsOut1,colsOut2,colsOut3,areas,sampleForPlots){
   
-  
-  # Get the output path for a variable
-  get_out_file <- function(path_output, variable_name) {
-    out_file <- paste0(path_output,"/outputDT/forCent",r_no,"/", variable_name,
-                       "_harscen",harvScen,
-                       "_harInten",harvInten,"_",
-                       rcpfile,"_",
-                       "sampleID",sampleID,".rdata")
-    return(out_file)
-  }
   
   nYears <-  max(region$nYears)
   nSites <-  max(region$nSites)
@@ -1258,7 +1366,6 @@ specialVarProc <- function(sampleX,region,r_no,harvScen,harvInten,rcpfile,sample
   pX <- merge(pX,p3)
   Vspruce <- pX
   
-  
   ####WenergyWood
   outX <- data.table(segID=sampleX$segID,apply(region$multiEnergyWood[,,,2],1:2,sum))
   if(sampleID==sampleForPlots){testPlot(outX,"WenergyWood",areas)}
@@ -1311,7 +1418,14 @@ specialVarProc <- function(sampleX,region,r_no,harvScen,harvInten,rcpfile,sample
   
   # Save all outputs
   outputNames <- c("domSpecies","domAge","Vdec","Vpine","Vspruce","WenergyWood","VenergyWood","GVgpp","GVw","Wtot")
-  invisible(lapply(outputNames, function(x) save(list=x, file = get_out_file(path_output = path_output, variable_name = x))))
+  invisible(lapply(outputNames, function(x) save(list=x, file = get_out_file(
+    path_output = path_output, 
+    variable_name = x,
+    r_no = r_no,
+    harvScen = harvScen,
+    harvInten = harvInten,
+    rcpfile = rcpfile,
+    sampleID = sampleID))))
   
   
   rm(domSpecies,domAge,Vdec,WenergyWood,Wtot,pX,p1,p2,p3); gc()
@@ -1807,4 +1921,3 @@ get_or_create_path <- function(pathVarName, defaultDir, subDir="") {
   }
   return(path)
 } 
-

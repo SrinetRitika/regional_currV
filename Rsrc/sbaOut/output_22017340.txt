@@ -1,0 +1,60 @@
+[1] "start sample ID 1"
+[1] "start sample ID 2"
+[1] "start sample ID 3"
+[1] "start sample ID 4"
+[1] "start sample ID 5"
+[1] "calculating clearcutting areas"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "runModel 5 completed"
+[1] "runModel 2 completed"
+[1] "runModel 1 completed"
+[1] "runModel 4 completed"
+[1] "runModel 3 completed"
+[[1]]
+[1] "Error in save(out, file = paste0(path_output, \"/outputDT/forCent\", r_no,  : \n  error writing to connection\n"
+attr(,"class")
+[1] "try-error"
+attr(,"condition")
+<simpleError in save(out, file = paste0(path_output, "/outputDT/forCent", r_no,     "/testData.rdata")): error writing to connection>
+
+[[2]]
+[1] "Error in save(list = varNames[varSel[ij]], file = paste0(path_output,  : \n  error writing to connection\n"
+attr(,"class")
+[1] "try-error"
+attr(,"condition")
+<simpleError in save(list = varNames[varSel[ij]], file = paste0(path_output,     "/outputDT/forCent", r_no, "/", varNames[varSel[ij]], "_harscen",     harvScen, "_harInten", harvInten, "_", rcpfile, "_", "sampleID",     sampleID, ".rdata")): error writing to connection>
+
+[[3]]
+[1] "Error in save(list = varNames[varSel[ij]], file = paste0(path_output,  : \n  error writing to connection\n"
+attr(,"class")
+[1] "try-error"
+attr(,"condition")
+<simpleError in save(list = varNames[varSel[ij]], file = paste0(path_output,     "/outputDT/forCent", r_no, "/", varNames[varSel[ij]], "_harscen",     harvScen, "_harInten", harvInten, "_", rcpfile, "_", "sampleID",     sampleID, ".rdata")): error writing to connection>
+
+[[4]]
+[1] "Error in save(list = varNames[varSel[ij]], file = paste0(path_output,  : \n  error writing to connection\n"
+attr(,"class")
+[1] "try-error"
+attr(,"condition")
+<simpleError in save(list = varNames[varSel[ij]], file = paste0(path_output,     "/outputDT/forCent", r_no, "/", varNames[varSel[ij]], "_harscen",     harvScen, "_harInten", harvInten, "_", rcpfile, "_", "sampleID",     sampleID, ".rdata")): error writing to connection>
+
+[[5]]
+[1] "Error in save(list = varNames[varSel[ij]], file = paste0(path_output,  : \n  error writing to connection\n"
+attr(,"class")
+[1] "try-error"
+attr(,"condition")
+<simpleError in save(list = varNames[varSel[ij]], file = paste0(path_output,     "/outputDT/forCent", r_no, "/", varNames[varSel[ij]], "_harscen",     harvScen, "_harInten", harvInten, "_", rcpfile, "_", "sampleID",     sampleID, ".rdata")): error writing to connection>
+

@@ -1,0 +1,35 @@
+[1] 28
+[1] 552031     22
+[1] 20000
+[1] 10
+[1] 9
+[1] "start sample ID 23"
+[1] "start sample ID 24"
+[1] "start sample ID 25"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "runModel 24 completed"
+[1] "runModel 23 completed"
+[1] "initSoilC 24"
+[1] "initSoilC 23"
+[1] "runModel 25 completed"
+[1] "initSoilC 25"
+[1] "start special vars 24"
+[1] "start special vars 23"
+[1] "start special vars 25"
+[[1]]
+[1] "all outs saved"
+
+[[2]]
+[1] "all outs saved"
+
+[[3]]
+[1] "all outs saved"
+

@@ -1,0 +1,63 @@
+[1] "start sample ID 1"
+[1] "start sample ID 2"
+[1] "start sample ID 3"
+[1] "start sample ID 4"
+[1] "start sample ID 5"
+[1] "start sample ID 6"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "calculating clearcutting areas"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "runModel 2 completed"
+[1] "runModel 6 completed"
+[1] "runModel 5 completed"
+[1] "runModel 1 completed"
+[1] "runModel 3 completed"
+[1] "runModel 4 completed"
+[1] "start special vars 6"
+[1] "start special vars 2"
+[1] "start special vars 5"
+[1] "start special vars 3"
+[1] "start special vars 4"
+[1] "start special vars 1"
+[1] "start sample ID 7"
+[1] "calculating clearcutting areas"
+[1] "harvest scenario Base"
+[1] "harvest intensity Base"
+[1] "runModel 7 completed"
+[1] "start special vars 7"
+[[1]]
+[1] "all outs saved"
+
+[[2]]
+[1] "all outs saved"
+
+[[3]]
+[1] "all outs saved"
+
+[[4]]
+[1] "all outs saved"
+
+[[5]]
+[1] "all outs saved"
+
+[[6]]
+[1] "all outs saved"
+
+[[7]]
+[1] "all outs saved"
+
