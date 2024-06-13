@@ -1,9 +1,0 @@
-[1] 46
-[1] 908477     22
-[1] 20000
-[1] 11
-[1] 9
-[1] "start sample ID 34"
-[1] "start sample ID 35"
-[1] "start sample ID 36"
-[1] "start sample ID 37"
